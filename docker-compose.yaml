@@ -1,0 +1,10 @@
+services:
+  maps-server:
+    build:
+      context: ../maps-mcp-server
+      dockerfile: Dockerfile
+    ports:
+      - '3004:3004'
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
