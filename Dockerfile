@@ -21,4 +21,4 @@ ENV NODE_ENV=production
 EXPOSE 3004
 
 # Run the server
-CMD ["npm", "run start"]
+CMD ["node", "dist/index.js"]
