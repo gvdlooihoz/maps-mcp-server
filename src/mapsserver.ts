@@ -92,11 +92,6 @@ export class MapsServer {
     this.app.get("/sse", async (req, res) => {
       const transport = new SSEServerTransport('/messages', res);
       this.transports[transport.sessionId] = transport;
-      res.setHeader('Cache-Control', 'no-cache');
-      res.setHeader('Content-Type', 'text/event-stream');
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Connection', 'keep-alive');
-      res.flushHeaders(); // flush the headers to establish SSE with client
       res.on("close", () => {
         delete this.transports[transport.sessionId];
       });
