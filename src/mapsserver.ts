@@ -98,7 +98,11 @@ export class MapsServer {
     }
 
     this.app.get("/sse", async (req, res) => {
-      const transport = new SSEServerTransport('/messages', res);
+      let mount = "";
+      if (req.headers.origin) {
+        mount = req.headers.origin;
+      }
+      const transport = new SSEServerTransport(mount + '/messages', res);
       this.transports[transport.sessionId] = transport;
       res.on("close", () => {
         delete this.transports[transport.sessionId];
